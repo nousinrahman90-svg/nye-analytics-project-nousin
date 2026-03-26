@@ -2,7 +2,6 @@
 -- One row per restaurant application
 
 WITH source AS (
-
    SELECT * FROM {{ source('raw', 'source_nyc_open_restaurant_apps') }}
 ),
 
@@ -87,8 +86,7 @@ cleaned AS (
    ) = 1
 )
 
-<<<<<<< HEAD
+
 SELECT * FROM cleaned
-=======
-SELECT * FROM cleaned
->>>>>>> 971c4629b286b6473f9c69745ae471542e197b74
+
+
