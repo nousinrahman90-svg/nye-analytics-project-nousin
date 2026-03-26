@@ -79,4 +79,3 @@ cleaned AS (
 
 SELECT * FROM cleaned
 
-;
