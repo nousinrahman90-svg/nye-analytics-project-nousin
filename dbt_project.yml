@@ -36,7 +36,22 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 
 models:
-  my_new_project:
+  nye_analytics_project_nousin:
     # Applies to all files under models/example/
-    example:
-      +materialized: table
+    assignment_work:
+
+      marts:
+
+        +materialized: table
+        +schema: nyc_transit_restaurants_marts
+
+        shared: 
+          +materialized: table
+
+          source_nyc_open_restaurant_apps:
+            +materialized: table
+
+          nyc_hw3_raw_data_source_dot_service_requests_history:
+            +materialized: table
+          
+
