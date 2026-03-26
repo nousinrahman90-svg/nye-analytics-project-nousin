@@ -40,8 +40,10 @@ models:
     # Applies to all files under models/example/
     assignment_work:
 
+      staging:
+        +schema: staging
       marts:
-
+        # This targets your models/assignment_work/marts/ folder
         +materialized: table
         +schema: nyc_transit_restaurants_marts
 
