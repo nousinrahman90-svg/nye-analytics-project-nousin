@@ -31,10 +31,7 @@ final as (
 
     left join {{ ref('dim_location') }} dl
         on coalesce(c.borough, '') = coalesce(dl.borough, '')
-        and coalesce(cast(c.zip_code as string), '') = coalesce(dl.zip_code, '')
-        and dl.community_board is null
-        and coalesce(cast(c.latitude as string), '') = coalesce(cast(dl.latitude as string), '')
-        and coalesce(cast(c.longitude as string), '') = coalesce(cast(dl.longitude as string), '')
+        and coalesce(c.zip_code, '') = coalesce(dl.zip_code, '')
 
     left join {{ ref('dim_collision_detail') }} dcd
         on coalesce(c.contributing_factor_vehicle_1, '') = coalesce(dcd.contributing_factor_vehicle_1, '')
