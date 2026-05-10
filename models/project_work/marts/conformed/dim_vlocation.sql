@@ -1,29 +1,21 @@
 {{ config(materialized='table') }}
 
-with locations as (
+WITH locations AS (
+    SELECT DISTINCT
+        coalesce(borough, 'UNKNOWN') AS borough,
+        coalesce(zip_code, 'UNKNOWN') AS zip_code
+    FROM {{ ref('stg_nyc_311_service_request_history') }}
 
-    select distinct
-        borough,
-        zip_code
-    from {{ ref('stg_nyc_311_service_request_history') }}
+    UNION DISTINCT
 
-    union distinct
-
-    select distinct
-        borough,
-        zip_code
-    from {{ ref('stg_nyc_service_mvcollision') }}
-
-),
-
-final as (
-
-    select
-        {{ dbt_utils.generate_surrogate_key(['borough','zip_code']) }} as location_sk,
-        borough,
-        zip_code
-    from locations
-
+    SELECT DISTINCT
+        coalesce(borough, 'UNKNOWN') AS borough,
+        coalesce(zip_code, 'UNKNOWN') AS zip_code
+    FROM {{ ref('stg_nyc_service_mvcollision') }}
 )
 
-select * from final
+SELECT
+    {{ dbt_utils.generate_surrogate_key(['borough','zip_code']) }} AS location_sk,
+    borough,
+    zip_code
+FROM locations
