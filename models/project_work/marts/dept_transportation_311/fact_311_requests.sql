@@ -35,12 +35,15 @@ SELECT
     1 AS request_count
 
 FROM stg_311 s
+
 LEFT JOIN dim_time t 
     ON DATE(s.created_date) = t.date
+
 LEFT JOIN dim_location l 
     ON coalesce(s.borough, 'UNKNOWN') = coalesce(l.borough, 'UNKNOWN') 
     AND coalesce(s.zip_code, 'UNKNOWN') = coalesce(l.zip_code, 'UNKNOWN')
+
 LEFT JOIN dim_service srv 
     ON coalesce(s.complaint_type, 'UNKNOWN') = coalesce(srv.complaint_type, 'UNKNOWN')
-    AND coalesce(s.descriptor, 'UNKNOWN') = coalesce(srv.descriptor, 'UNKNOWN')
     AND coalesce(s.agency, 'UNKNOWN') = coalesce(srv.agency, 'UNKNOWN')
+    AND coalesce(s.agency_name, 'UNKNOWN') = coalesce(srv.agency_name, 'UNKNOWN')
